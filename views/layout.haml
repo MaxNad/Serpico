@@ -1,186 +1,150 @@
 !!!
 %html{ :lang => "en" }
   %head
+    %meta{ :charset => "utf-8" }/
+    %meta{ :content => "", :name => "description" }/
+    %meta{ :content => "", :name => "author" }/
+
+    %title Serpico
+
     %script{ :src => "/js/jquery-3.1.1.js" }
     %script{ :src => "/js/jquery-migrate-3.0.0.min.js" }
-    %script{ :src => "/js/bootstrap-collapse.js" }
-    %script{ :src => "/js/bootstrap-transition.js" }
-    %script{ :src => "/js/bootstrap-alert.js" }
-    %script{ :src => "/js/bootstrap-modal.js" }
-    %script{ :src => "/js/bootstrap-dropdown.js" }
-    %script{ :src => "/js/bootstrap-scrollspy.js" }
-    %script{ :src => "/js/bootstrap-tab.js" }
-    %script{ :src => "/js/bootstrap-tooltip.js" }
-    %script{ :src => "/js/bootstrap-popover.js" }
-    %script{ :src => "/js/bootstrap-button.js" }
-    %script{ :src => "/js/bootstrap-carousel.js" }
-    %script{ :src => "/js/bootstrap-typeahead.js" }
+    %script{ :src => "/js/bootstrap-4.0.0/bootstrap.bundle.min.js" }
+
     %script{ :src => "/js/format_shortcut.js" }
     %script{ :src => "/js/helpers.js" }
 
-    %meta{ :charset => "utf-8" }/
-    %title Serpico
-    %meta{ :content => "", :name => "description" }/
-    %meta{ :content => "", :name => "author" }/
-    %link{ :href => "/css/bootstrap.css", :rel => "stylesheet" }/
-    %link{ :href => "/css/bootstrap-responsive.css", :rel => "stylesheet" }/
-    %link{ :href => "/css/font-awesome.css", :rel => "stylesheet" }/
-    :css
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .padded {
-        padding-top: 20px;
-        padding-bottom: 5px;
-        padding-left: 5px;
-        padding-right: 0px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-      .orange {
-        background-color: #ffa500;
-      }
-      .btn-navbar.padded {
-        margin-top: 22px;
-      }
+    %link{ :href => "/css/style.css", :rel => "stylesheet" }/
+    %link{ :href => "/css/font-awesome.min.css", :rel => "stylesheet" }/
+    %link{ :href => "/css/bootstrap-4.0.0/bootstrap.min.css", :rel => "stylesheet" }/
 
-      @media (max-width: 979px) {
-        body {
-          padding-top: 0px;
-        }
-      }
-
-      %link{ :href => "/css/bootstrap-responsive.css", :rel => "stylesheet" }
   - if valid_session?
     %body
-      .navbar.navbar-fixed-top
-        .navbar-inner
-          %ul.nav.padded
-            %li
-              %a.fa.fa-file-word-o{ :href => "/reports/list" } &nbsp;List Reports
-            %li
-              %a.fa.fa-pencil-square-o{ :href => "/report/new" } &nbsp;New Report
+      %nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
+        %span.mr-auto
+          %a.navbar-text.padded.fa.fa-file-word-o{ :href => "/reports/list" } &nbsp;List Reports
+          %a.navbar-text.padded.fa.fa-pencil-square-o{ :href => "/report/new" } &nbsp;New Report
 
-          %a.btn.btn-navbar.padded{ "data-toggle" => "collapse", "data-target" => ".nav-collapse" }
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
+        %button.navbar-toggler{ :type => "button", "data-toggle" => "collapse", "data-target" => "#navbarNav", "aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation" }
+          %span.navbar-toggler-icon
 
-          .nav-collapse.collapse
-            %ul.nav.pull-right.padded
-              - if is_administrator?
-                %li
-                  %a.fa.fa-sitemap{ :href => "/master/findings" } &nbsp;Findings Database
-                %li
-                  %a.fa.fa-reorder{ :href => "/admin/" } &nbsp;Administration
-              %li
-                %a.fa.fa-tasks{ :href => "/info" } &nbsp;Consultant Information
-              %li
-                %a.fa.fa-support{ :href => "/reset" } &nbsp;Change Password
-              %li
-                %a.fa.fa-external-link-square{ :href => "/logout" } &nbsp;Logout
+        %div.collapse.navbar-collapse#navbarNav
+          %ul.navbar-nav.ml-auto
+            - if is_administrator?
+              %li.nav-item.padded
+                %a.nav-link.fa.fa-sitemap{ :href => "/master/findings" } &nbsp;Findings Database
+              %li.nav-item.padded
+                %a.nav-link.fa.fa-reorder{ :href => "/admin/" } &nbsp;Administration
+            %li.nav-item.padded
+              %a.nav-link.fa.fa-tasks{ :href => "/info" } &nbsp;Consultant Information
+            %li.nav-item.padded
+              %a.nav-link.fa.fa-support{ :href => "/reset" } &nbsp;Change Password
+            %li.nav-item.padded
+              %a.nav-link.fa.fa-external-link-square{ :href => "/logout" } &nbsp;Logout
 
       <br>
-      .container-fluid
+      %main.container-fluid
         - if @master
           %div.alert.alert-danger
             %strong WARNING
             %br
             You are editing the Templates Database
           %br
-        .row-fluid
-          .span2
-            %br
+        %div.row
+          %aside.col-sm-3
             - if @master
-              %ul.nav.nav-list
-                %li.nav-header Findings Menu
+              %ul.navbar-nav.nav-list
+                %li.navbar-header Findings Menu
                 %li
                   %a{ :href => "/master/findings" } List Current Findings
                 %li
                   %a{ :href => "/master/findings/new" } Add Finding
-              %ul.nav.nav-list
-                %li.nav-header Database Functions
+              %ul.navbar-nav.nav-list
+                %li.navbar-header Database Functions
                 %li
                   %a{ :href => "/master/export" } Export Current Findings
                 %li
                   %a{ :href => "/master/import" } Import Findings
             - elsif @admin
-              %ul.nav.nav-list
-                %li.nav-header Admin User Menu
+              %ul.navbar-nav.nav-list
+                %li.navbar-header Admin User Menu
                 %li
                   %a{ :href => "/admin/add_user" } Add User
                 %li
                   %a{ :href => "/admin/list_user" } List Users
-                %li.nav-header Admin Report Template Menu
+                %li.navbar-header Admin Report Template Menu
                 %li
                   %a{ :href => "/admin/templates/add" } Add Report Template
                 %li
                   %a{ :href => "/admin/templates" } List Report Templates
                 %li
                   %a{ :href => "/admin/udo_templates" } Manage UDOs templates for reports
-                %li.nav-header Plugin Menu
+                %li.navbar-header Plugin Menu
                 %li
                   %a{ :href => "/admin/plugins" } Enable/Disable Plugins
                 %li
                   %a{ :href => "/admin/admin_plugins" } Administrator Specific Plugins
-                %li.nav-header Maintenance Menu
+                %li.navbar-header Maintenance Menu
                 %li
                   %a{ :href => "/admin/config" } Modify Configurations
                 %li
                   %a{ :href => "/admin/dbbackup" } Backup Master Database
                   %a{ :href => "/admin/attacments_backup" } Backup All Attachments
                 - @version = File.open("VERSION.txt").read()
-                %li.nav-header Serpico Version: #{@version}
+                %li.navbar-header Serpico Version: #{@version}
 
             - else
               - if @report
-                %ul.nav.nav-list
-                  %li.nav-header
+                %ul.navbar-nav.nav-list
+                  %li.navbar-header
                     #{@report.report_name}
                   %li
                     %a{ :href => "/report/#{@report.id}/edit" } Edit Report Information
                   %li
                     %a{ :href => "/report/#{@report.id}/generate" } Generate Report
-                    %li.nav-header Findings
+                    %li.navbar-header Findings
                   %li
                     %a{ :href => "/report/#{@report.id}/findings" } List Current Report Findings
                   %li
                     %a{ :href => "/report/#{@report.id}/findings_add" } Add Finding from Templates
                   %li
                     %a{ :href => "/report/#{@report.id}/findings/new" } Create New Finding
-                  %li.nav-header Attachments
+                  %li.navbar-header Attachments
                   %li
                     %a{ :href => "/report/#{@report.id}/upload_attachments" } Upload New Attachment
                   %li
                     %a{ :href => "/report/#{@report.id}/attachments" } List Attachments
-                  %li.nav-header Metasploit Data Management
+                  %li.navbar-header Metasploit Data Management
                   %li
                     %a{ :href => "/report/#{@report.id}/hosts" } Hosts
                   %li
                     %a{ :href => "/report/#{@report.id}/vulns" } Vulnerabilities
                   %li
                     %a{ :href => "/report/#{@report.id}/services" } Services
-                  %li.nav-header Additional
+                  %li.navbar-header Additional
                   %li
                     %a{ :href => "/report/#{@report.id}/additional_features" } Additional Features
               - if @plugin_side_menu
-                %ul.nav.nav-list
-                  %li.nav-header Enabled Plugins
+                %ul.navbar-nav.nav-list
+                  %li.navbar-header Enabled Plugins
                   -@plugin_side_menu.each do |item|
                     %li
                     %a{ :href => "#{item["link"]}?report_id=#{@report.id}" } #{item["name"]}
 
-          =yield
+          %div.col-sm-9
+            %br
+            =yield
   - else
-    %body
     %link{ :href => "/css/signin.css", :rel => "stylesheet", :type => "text/css" }
-    .container
-    %form.form-signin{ :action => "/login", :method => "POST", :role => "form" }
-      %img.text-center{ :src => "#{@logo}", :height => 150, :width =>  500 }
-      %br
-      %br
-      %input.form-control.btn-block{ :autofocus => "", :placeholder => "Username", :required => "", :type => "text", :name=> "username" }
-      %input.form-control.btn-block{ :placeholder => "Password", :required => "", :type => "password", :name=> "password", :autocomplete => "off" }
-      %button.btn.btn-signin.btn-block.form-control{ :type => "submit" } Sign in
+
+    %body
+      %main.container
+        %form.form-signin{ :action => "/login", :method => "post" }
+          %img.logo{ :src => "#{@logo}", :alt => "Serpico" }
+          %br
+          %br
+          %label.sr-only{ :for => "username" } Username
+          %input.form-control#username{ :placeholder => "Username", :required => "", :type => "text", :name=> "username", :autofocus => "" }
+          %label.sr-only{ :for => "password" } Password
+          %input.form-control#password{ :placeholder => "Password", :required => "", :type => "password", :name=> "password", :autocomplete => "off" }
+          %button.btn.btn-signin.btn-block{ :type => "submit" } Sign in
