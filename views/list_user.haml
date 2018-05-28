@@ -1,31 +1,29 @@
-.col-md-10
+.col-lg-8.col-10
   %br
   %h3 Current Users
   %br
 
-  .table.table-striped
-    %table{ :style => "width: 40%" }
+  %div.table.table-striped
+    %table
       %tbody
         - if @users
           %tr
-            %td{ :style => "width: 30%" }
-              %b
-                Username
-            %td{ :style => "width: 30%" }
-              %b
-                Level/Authentication Type
-            %td{ :style => "width: 40%" }
-              Actions
+            %th{ :style => "width: 30%" }
+              Username
+            %th{ :style => "width: 30%" }
+              Level/Authentication Type
+            %th{ :style => "width: 40%;text-align: right;" }
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actions
           - @users.each do |user|
             %tr
               %td{ :style => "width: 30%" }
                 #{user.username}
               %td{ :style => "width: 30%" }
                 #{user.type} / #{user.auth_type}
-              %td{ :style => "width: 40%" }
-                %a.btn.btn-danger{ :href => "/admin/delete/#{user.id}" }
-                  %i.icon-trash.icon-white{ :title => "Delete User" }
-                %a.btn.btn-warning{ :href => "/admin/edit_user/#{user.id}" }
-                  %i.icon-pencil.icon-white{ :title => "Edit Password" }
+              %td{ :style => "width: 40%;text-align: right;" }
+                %a.btn.btn-icon-sm.btn-warning{ :href => "/admin/edit_user/#{user.id}" }
+                  %i.fa.fa-edit{ :title => "Edit Password" }
+                %a.btn.btn-icon-sm.btn-danger{ :href => "/admin/delete/#{user.id}" }
+                  %i.fa.fa-trash-o{ :title => "Delete User" }
         - else
           No Users. How Curious. Who are you?

@@ -1,7 +1,7 @@
-.span9.indent3
+.col-lg-8.col-10
   %br
-    .table.table-striped#mytable
-      %table{ :style => "width: 80%" }
+    %div.table.table-striped#mytable
+      %table
         %tbody
           - if @reports.size > 0
             %input.form-control#search{ :type => "text", :placeholder => "Report Name Search" }
@@ -13,7 +13,7 @@
               Delete selected
             %br
             %br
-            %trd
+            %tr
               %th
                 %input.checkbox#checkall{ :type => "checkbox" }
               %th{ :style => "width: 60%" }
@@ -22,7 +22,7 @@
                 Customer
               %th{ :style => "width: 10%" }
                 Owner
-              %th{ :style => "width: 20%" }
+              %th{ :style => "width: 20%;text-align: right;" }
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actions
             - @reports.each do |report|
               %tr
@@ -34,21 +34,21 @@
                   #{report.full_company_name}
                 %td.searchable{ :style => "width: 10%", :"data-index" => "#{report.report_name.downcase}" }
                   #{report.owner}
-                %td.searchable{ :style => "width: 20%", :"data-index" => "#{report.report_name.downcase}" }
+                %td.searchable{ :style => "width: 20%;text-align: right;", :"data-index" => "#{report.report_name.downcase}" }
                   - if @master
                     %a.btn.btn-warning{ :href => "/master/reports/#{finding.id}" }
-                      %i.icon-pencil.icon-white{ :title => "Edit" }
+                      %i.icon-pencil{ :title => "Edit" }
                     %a.btn.btn-info{ :href => "/master/reports/#{report.id}/generate" }
-                      %i.icon-play-circle.icon-white{ :title => "Preview" }
+                      %i.icon-play-circle{ :title => "Preview" }
                   - else
-                    %a.btn.btn-warning{ :href => "/report/#{report.id}/edit" }
-                      %i.icon-pencil.icon-white{ :title => "Edit" }
-                    %a.btn.btn-info{ :href => "/report/#{report.id}/generate" }
-                      %i.icon-play-circle.icon-white{ :title => "Preview" }
-                    %a.btn.btn-danger{ :href => "/report/remove/#{report.id}" }
-                      %i.icon-remove.icon-white{ :title => "Delete" }
-                    %a.btn.btn-inverse{ :href => "/admin/add_user/#{report.id}" }
-                      %i.icon-user.icon-white{ :title => "Add Author" }
+                    %a.btn.btn-icon-sm.btn-warning.mb-1{ :href => "/report/#{report.id}/edit" }
+                      %i.fa.fa-edit{ :title => "Edit" }
+                    %a.btn.btn-icon-sm.btn-info.mb-1{ :href => "/report/#{report.id}/generate" }
+                      %i.fa.fa-play-circle{ :title => "Preview" }
+                    %a.btn.btn-icon-sm.btn-danger{ :href => "/report/remove/#{report.id}" }
+                      %i.fa.fa-trash-o{ :title => "Delete" }
+                    %a.btn.btn-icon-sm.btn-dark{ :href => "/admin/add_user/#{report.id}" }
+                      %i.fa.fa-user{ :title => "Add Author" }
 
           - else
             %h4

@@ -1,4 +1,4 @@
-body {
+body.login {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
@@ -38,7 +38,7 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.btn-signin {
+.btn.btn-signin {
   background: #47586f;
   color: #ffffff;
 }
@@ -46,7 +46,8 @@ body {
   background: #384557;
   color: #ffffff;
 }
-.btn-signin:active, .btn-signin.active {
+.btn.btn-signin:active, .btn.btn-signin.active {
   background: #47586f;
   box-shadow: none;
+  color: #ffffff;
 }
