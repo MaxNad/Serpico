@@ -1,8 +1,8 @@
 .col-auto
+  %br
+  %h2 Create Report (or <a href="/report/import">Import</a>)
+  %br
   %form{ :method => "post" }
-    %br
-    %h2 Create Report (or <a href="/report/import">Import</a>)
-    %br
     - if @templates.size > 0
       .row.mb-1
         %label.col-5.v-align-center{ :for => "report_name" }

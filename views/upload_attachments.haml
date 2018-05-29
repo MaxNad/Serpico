@@ -1,23 +1,21 @@
-.col-md-10
+.col-auto
   %br
   %h2 Upload Attachment
   %h4 Note:
-  %h4 &nbsp;&nbsp;&bullet;&nbsp;Only jpg and png are supported for screenshots
-  %h4 &nbsp;&nbsp;&bullet;&nbsp;The file name is inherited from the file.
-  %h4 &nbsp;&nbsp;&bullet;&nbsp;Multiple files can be uploaded at once.
+  %h6 &nbsp;&nbsp;&bullet;&nbsp;Only jpg and png are supported for screenshots
+  %h6 &nbsp;&nbsp;&bullet;&nbsp;The file name is inherited from the file.
+  %h6 &nbsp;&nbsp;&bullet;&nbsp;Multiple files can be uploaded at once.
   - if @no_file == "1"
     You forgot to include a file, silly
   %br
 
   %form{ :method => "post", :enctype => "multipart/form-data" }
-    %table
-      %tr
-        %td
-          %label.col-md-3{ :for => "files" }
-            Upload Files &nbsp;
-        %td
-          %input#files{ :type => "file", :name => "files[]", :multiple => true }
+    .row.mb-1
+      %label.col-4.v-align-center{ :for => "files" }
+        Upload Files &nbsp;
+      %input.col-7#files{ :type => "file", :name => "files[]", :multiple => true }
+
     %br
-    %input.btn.btn-default{ :type => "submit", :value => "Upload" }
-    %a.btn.btn-default{ :href => "/report/#{@report.id}/edit" }
+    %input.btn.btn-primary{ :type => "submit", :value => "Upload" }
+    %a.btn.btn-secondary{ :href => "/report/#{@report.id}/edit" }
       Cancel

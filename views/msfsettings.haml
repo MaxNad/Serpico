@@ -1,57 +1,51 @@
-.col-md-10
+.col-auto
   - if not @vulnmap
     Vulnerability Mapping not enabled. Contact your administrator to enable (vulnmap configuration setting)
   - else
     %br
-    .row
-      .alert.alert-info
-        .fa.fa-exclamation-circle
-        &nbsp;Remember to start your metasploit RPC daemon by running the following command in your terminal:
-        %b msfrpcd -U $username -P $password --ssl
+    %div.alert.alert-info
+      .fa.fa-exclamation-circle
+      &nbsp;Remember to start your metasploit RPC daemon by running the following command in your terminal:
+      %b msfrpcd -U $username -P $password --ssl
 
     %h2 Metasploit RPC Settings
     %br
-    %h4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the metasploit RPC settings for this report.
+    %h4 &nbsp;&nbsp;&nbsp;&nbsp;Specify the metasploit RPC settings for this report.
     %br
 
     %form.form-horizontal{ :method => "post", :enctype => "application/x-www-form-urlencoded" }
-      .control-group
-        %label.control-label{ :for => "ip" } IP Address
-        .controls
-          - if @msfsettings and @msfsettings.ip
-            %input#ip{ :type => "text", :name => "ip", :value => "#{@msfsettings.ip}" }
-          - else
-            %input#ip{ :type => "text", :name => "ip", :value => "" }
-      .control-group
-        %label.control-label{ :for => "port" } Port
-        .controls
-          - if @msfsettings and @msfsettings.port
-            %input#port{ :type => "text", :name => "port", :value => "#{@msfsettings.port}" }
-          -else
-            %input#port{ :type => "text", :name => "port", :value => "" }
-      .control-group
-        %label.control-label{ :for => "user" } Username
-        .controls
-          - if @msfsettings and @msfsettings.user
-            %input#user{ :type => "text", :name => "user", :value => "#{@msfsettings.user}" }
-          - else
-            %input#user{ :type => "text", :name => "user", :value => "" }
-      .control-group
-        %label.control-label{ :for => "pass" } Password
-        .controls
-          - if @msfsettings and @msfsettings.pass
-            %input#pass{ :type => "password", :name => "pass", :value => "#{@msfsettings.pass}" }
-          - else
-            %input#pass{ :type => "password", :name => "pass", :value => "" }
-      .control-group
-        %label.control-label{ :for => "workspace" } Workspace
-        .controls
-          - if @msfsettings and @msfsettings.workspace
-            %input#workspace{ :type => "text", :name => "workspace", :value => "#{@msfsettings.workspace}" }
-          - else
-            %input#workspace{ :type => "text", :name => "workspace", :value => "" }
+      .row.mb-1
+        %label.col-3.v-align-center{ :for => "ip" } IP Address
+        - if @msfsettings and @msfsettings.ip
+          %input.col-5.form-control#ip{ :type => "text", :name => "ip", :value => "#{@msfsettings.ip}" }
+        - else
+          %input.col-5.form-control#ip{ :type => "text", :name => "ip", :value => "" }
+      .row.mb-1
+        %label.col-3.v-align-center{ :for => "port" } Port
+        - if @msfsettings and @msfsettings.port
+          %input.col-5.form-control#port{ :type => "text", :name => "port", :value => "#{@msfsettings.port}" }
+        -else
+          %input.col-5.form-control#port{ :type => "text", :name => "port", :value => "" }
+      .row.mb-1
+        %label.col-3.v-align-center{ :for => "user" } Username
+        - if @msfsettings and @msfsettings.user
+          %input.col-5.form-control#user{ :type => "text", :name => "user", :value => "#{@msfsettings.user}" }
+        - else
+          %input.col-5.form-control#user{ :type => "text", :name => "user", :value => "" }
+      .row.mb-1
+        %label.col-3.v-align-center{ :for => "pass" } Password
+        - if @msfsettings and @msfsettings.pass
+          %input.col-5.form-control#pass{ :type => "password", :name => "pass", :value => "#{@msfsettings.pass}" }
+        - else
+          %input.col-5.form-control#pass{ :type => "password", :name => "pass", :value => "" }
+      .row.mb-1
+        %label.col-3.v-align-center{ :for => "workspace" } Workspace
+        - if @msfsettings and @msfsettings.workspace
+          %input.col-5.form-control#workspace{ :type => "text", :name => "workspace", :value => "#{@msfsettings.workspace}" }
+        - else
+          %input.col-5.form-control#workspace{ :type => "text", :name => "workspace", :value => "" }
 
       %br
-      %input.btn.btn-default{ :type => "submit", :value => "Save" }
-      %a.btn.btn-default{ :href => "/report/#{@report.id}/additional_features" }
+      %input.btn.btn-primary{ :type => "submit", :value => "Save" }
+      %a.btn.btn-secondary{ :href => "/report/#{@report.id}/additional_features" }
         Cancel

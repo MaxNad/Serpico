@@ -1,4 +1,4 @@
-.col-md-10
+.col-auto
   - if @message
     - if @message == "success"
       %br
@@ -10,27 +10,20 @@
     %br
 
     %form{ :method => "post" }
-      %table
-        %tr
-          %td
-            %label.col-md-3{ :for => "old_pass" }
-              Old Password &nbsp;
-          %td
-            %input#old_pass{ :type => "password", :name => "old_pass", :value=> "", :autocomplete => "off" }
-        %tr
-          %td
-            %label.col-md-3{ :for => "new_pass" }
-              New Password &nbsp;
-          %td
-            %input#new_pass{ :type => "password", :name => "new_pass", :value=> "", :autocomplete => "off" }
-        %tr
-          %td
-            %label.col-md-3{ :for => "new_pass_confirm" }
-              Confirm New Password &nbsp;
-          %td
-            %input#new_pass_confirm{ :type => "password", :name => "new_pass_confirm", :value => "", :autocomplete => "off" }
+      .row.mb-1
+        %label.col-5.v-align-center{ :for => "old_pass" }
+          Old Password &nbsp;
+        %input.col-7.form-control#old_pass{ :type => "password", :name => "old_pass", :value=> "", :autocomplete => "off" }
+      .row.mb-1
+        %label.col-5.v-align-center{ :for => "new_pass" }
+          New Password &nbsp;
+        %input.col-7.form-control#new_pass{ :type => "password", :name => "new_pass", :value=> "", :autocomplete => "off" }
+      .row.mb-1
+        %label.col-5.v-align-center{ :for => "new_pass_confirm" }
+          Confirm New Password &nbsp;
+        %input.col-7.form-control#new_pass_confirm{ :type => "password", :name => "new_pass_confirm", :value => "", :autocomplete => "off" }
 
       %br
-      %input.btn.btn-default{ :type => "submit", :value => "Save" }
-      %a.btn.btn-default{ :href => "/reports/list" }
+      %input.btn.btn-primary{ :type => "submit", :value => "Save" }
+      %a.btn.btn-secondary{ :href => "/reports/list" }
         Cancel
